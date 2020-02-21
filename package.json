@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint .",
+    "pretest": "clear && printf '\\e[3J'",
     "test": "mocha ."
   },
   "keywords": [],

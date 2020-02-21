@@ -21,7 +21,7 @@ For each president the following rules apply:
 * `id` is required. The next id can be calculated using the supplied `nextId`-function
 * `name` is required
 * `from` is required and should be the year as a YYYY-string
-* `to` is not required as some presidents has not ended their tenture ... yet.
+* `to` is not required as some presidents has not ended their tenure ... yet.
 
 RESTful means that you should adhere to the REST style and supply endpoints for:
 
