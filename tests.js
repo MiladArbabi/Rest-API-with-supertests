@@ -110,12 +110,12 @@ describe('/api/presidents/:id', () => {
           assert.notStrictEqual(err, undefined);
           assert.strictEqual(res.status, 200);
           assert.strictEqual(res.type, 'application/json');
-          assert.deepStrictEqual(JSON.parse(res.text), api.db().find((x) => x.id == id));
+          assert.deepStrictEqual(JSON.parse(res.text), api.db().find((president) => president.id == id));
           done();
         });
     });
 
-    it('rejects invalid ids', (done) => {
+    it.only('rejects invalid ids', (done) => {
       const id = -100;
       request(app)
         .get(`/api/presidents/${id}`)

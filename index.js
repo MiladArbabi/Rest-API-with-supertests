@@ -30,19 +30,21 @@ const nextId = presidents => {
   return Number.parseInt(highestId) + 1;
 };
 
-// const firstPresidentId = () => {
-//   return presidents.map(({ id }) => id).sort()[0];
-// };
+const firstPresidentId = () => {
+  return presidents.map(({ id }) => id).sort()[0];
+};
 
-// const LastPresidentId = () => {
-//   const lastId = presidents.map(({ id }) => id).sort();
-//   return lastId[lastId.length - 1];
-// };
+const LastPresidentId = () => {
+  const lastId = presidents.map(({ id }) => id).sort();
+  return lastId[lastId.length - 1];
+};
 
-const validate = (name, from, to, foo) => {
+const validate = (id, name, from, to) => {
   const regex = /^[\w]{4}$/m;
   if (!regex.test(from) || !regex.test(to)) {
     throw 'Invalid From Format';
+  } else if (firstPresidentId <= id <= LastPresidentId){
+    throw 'Invalid ID Format';
   }
 };
 
@@ -52,10 +54,11 @@ app.get('/api/presidents', (req, res) => {
 });
 
 app.get('/api/presidents/:id', (req, res) => {
-  presidents.forEach(president => president.id === req.params.id);
-  console.log('presidentById:', presidents);
-
-  res.status(200).json(presidentById);
+  if(req.params.id < 0 || isNaN(req.params.id)) {
+    res.status(404).end();
+  }
+  const getPresidentById  =  presidents.find(president => president.id === req.params.id);
+  res.status(200).json(getPresidentById);
 });
 
 app.post('/api/presidents', (req, res, next) => {
